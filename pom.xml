@@ -12,7 +12,7 @@
 	<artifactId>studysync</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>studysync</name>
-	<description>&lt;description&gt;     StudySync is a social learning and studying platform designed to help users manage their study squedules, track progress, and engage with a supportive community. It includes study efficiency features such as customizable Pomodoro timers, task breakdowns, personalized reminders, and mindfulness exercises to assist users with focus and productivity. &lt;/description&gt;</description>
+	<description>    StudySync is a social learning and studying platform designed to help users manage their study schedules, track progress, and engage with a supportive community. It includes study efficiency features such as customizable Pomodoro timers, task breakdowns, personalized reminders, and mindfulness exercises to assist users with focus and productivity.</description>
 	<url/>
 	<licenses>
 		<license/>
