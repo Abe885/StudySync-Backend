@@ -2,17 +2,40 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>StudySync</title>
 </head>
 <body>
-      <h1>Register</h1>
-      <form action="/register" method="post">
-         <label for="username"  >Username:</label><br>
-         <input type="text" id="username" name="username"><br>
-         <label for="password">Password:</label><br>
-         <input type="password" id="password" name="password"><br>
-         <input type="submit" value="Register">
-      </form>
-      <p>Already have an account? Click <a href="/login">here</a> to login.</p>
+<h1>Create a StudySync account</h1>
+<form action="/register" method="post">
+    <div>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" th:field="${user.email}" placeholder="example@email.com" required><br>
+    </div>
+    <div>
+        <label for="firstName">First Name:</label><br>
+        <input type="text" id="firstName" name="firstName" th:field="${user.firstName}" placeholder="first name" required><br>
+    </div>
+    <div>
+        <label for="lastName">Last Name:</label><br>
+        <input type="text" id="lastName" name="lastName" th:field="${user.lastName}" placeholder="last name" required><br>
+    </div>
+    <div>
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" th:field="${user.username}" placeholder="username" required><br>
+    </div>
+    <div>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" th:field="${user.password}" placeholder="password" required><br>
+    </div>
+    <div>
+        <label for="confirmPassword">Confirm Password:</label><br>
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="re-enter password" ><br>
+    </div>
+
+    <div>
+        <button type="submit">Create Account</button>
+    </div>
+</form>
+<p>Already have an account? Click <a href="/login">here</a> to login.</p>
 </body>
 </html>

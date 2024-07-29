@@ -3,21 +3,26 @@ package com.coderscampus.studysync.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 
+
+import java.util.List;
+
+
 @Entity
 @Data
-
-public class Comment {
+public class StudyQuest {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String content;
+    private String name;
+    private String description;
+    private Boolean isComplete;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
     private StudyGroup studyGroup;
 
-    private Boolean isFlagged;
+    @OneToMany
+    private List<Task> tasks;
+
 }

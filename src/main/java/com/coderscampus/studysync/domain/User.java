@@ -12,6 +12,7 @@ import java.util.List;
 @Getter
 @ToString
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +24,15 @@ public class User {
     private String lastName;
     private String authorization;
 
+    
+
     @ManyToMany
     @JoinTable(
-            name = "community_users",
+            name = "study_group_user",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "community_id")
+            inverseJoinColumns = @JoinColumn(name = "study_group_id")
     )
-    private List<Community> communities = new ArrayList<>();
+    private List<StudyGroup> studyGroups = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
