@@ -22,9 +22,14 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    private String authorization;
 
-    
+    @ManyToMany
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> roles = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -47,5 +52,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "friend_id")
     )
     private List<User> friends = new ArrayList<>();
+
+
+
 
 }
