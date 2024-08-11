@@ -27,7 +27,7 @@ public class UserService {
         user.setRoles(Collections.singletonList(userRole));
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        
+
         userRepository.save(user);
     }
 }

@@ -2,13 +2,14 @@ package com.coderscampus.studysync.service;
 
 import com.coderscampus.studysync.domain.User;
 import com.coderscampus.studysync.repository.UserRepository;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
-
+import com.coderscampus.studysync.domain.Role;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -29,10 +30,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
                 .password(user.getPassword())
-                .authorities(user.getRoles().stream())
-                .map(Role::getName)
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList())
+                .authorities(user.getRoles().stream()
+                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
+                        .collect(Collectors.toList()))
                 .build();
     }
 }
