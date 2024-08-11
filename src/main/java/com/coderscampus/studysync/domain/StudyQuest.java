@@ -19,16 +19,27 @@ public class StudyQuest {
     private int completedTasks;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
+    @JoinColumn(name = "study_group_id")
     private StudyGroup studyGroup;
 
-    @OneToMany
+
+    @OneToMany(mappedBy = "studyQuest", cascade = CascadeType.ALL)
     private List<Task> tasks;
 
-    public double getProgress() {
-        return (double) completedTasks / totalTasks;
+   public int getTotalTasks() {
+        return tasks != null ? tasks.size() : 0;
     }
 
+    public long getCompletedTasks() {
+        return tasks != null ? tasks.stream().filter(Task::getIsComplete).count() : 0;
+    }
+
+    public double getProgress() {
+        int totalTasks = getTotalTasks();
+        return totalTasks > 0 ? (double) getCompletedTasks() / totalTasks : 0.0;
+    }
 }

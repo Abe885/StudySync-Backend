@@ -26,8 +26,8 @@ public class UserService {
 
 
     public void saveUser(User user, String roleName) {
-        Role userRole = roleRepository.findByName(roleName);
-        user.setRoles(Collections.singletonList(userRole));
+        Role role = roleRepository.findByName(roleName);
+        user.setRoles(Collections.singletonList(role));
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 

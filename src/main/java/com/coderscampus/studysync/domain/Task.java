@@ -1,9 +1,7 @@
 package com.coderscampus.studysync.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 
@@ -13,12 +11,18 @@ import lombok.Data;
 public class Task {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
     private Boolean isComplete;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "study_quest_id")
     private StudyQuest studyQuest;
 
 }
