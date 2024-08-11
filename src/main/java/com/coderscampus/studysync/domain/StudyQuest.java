@@ -15,6 +15,8 @@ public class StudyQuest {
     private String name;
     private String description;
     private Boolean isComplete;
+    private int totalTasks;
+    private int completedTasks;
 
     @ManyToOne
     private User user;
@@ -24,5 +26,9 @@ public class StudyQuest {
 
     @OneToMany
     private List<Task> tasks;
+
+    public double getProgress() {
+        return (double) completedTasks / totalTasks;
+    }
 
 }

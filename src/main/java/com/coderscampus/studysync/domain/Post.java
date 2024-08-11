@@ -1,23 +1,24 @@
 package com.coderscampus.studysync.domain;
 
 import jakarta.persistence.*;
-import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Data
-
-public class Comment {
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    private Post post;
+    private StudyGroup studyGroup;
 
-    private Boolean isFlagged;
+    @OneToMany
+    private List<Comment> comments = new ArrayList<>();
 }

@@ -6,8 +6,11 @@ import com.coderscampus.studysync.repository.RoleRepository;
 import com.coderscampus.studysync.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -22,12 +25,22 @@ public class UserService {
     }
 
 
-    public void saveUser(User user) {
-        Role userRole = roleRepository.findByName("USER");
+    public void saveUser(User user, String roleName) {
+        Role userRole = roleRepository.findByName(roleName);
         user.setRoles(Collections.singletonList(userRole));
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);
     }
+
+    public void updateUserProfile(User user, MultipartFile profilePicture, List<String> subjects) throws IOException {
+        if (!profilePicture.isEmpty()) {
+            user.setProfilePicture(profilePicture.getBytes());
+        }
+
+        user.setSubjects(subjects);
+        userRepository.save(user);
+    }
+
 }

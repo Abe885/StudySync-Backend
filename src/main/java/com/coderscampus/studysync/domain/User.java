@@ -23,6 +23,13 @@ public class User {
     private String firstName;
     private String lastName;
 
+    @Lob
+    private Byte[] profileImage;
+
+    @ElementCollection
+    private List<String> subjects = new ArrayList<>();
+
+
     @ManyToMany
     @JoinTable(
             name = "user_roles",
@@ -54,6 +61,7 @@ public class User {
     private List<User> friends = new ArrayList<>();
 
 
+    public void setProfilePicture(byte[] bytes) {
 
-
+    }
 }
