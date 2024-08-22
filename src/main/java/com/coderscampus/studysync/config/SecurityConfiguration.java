@@ -33,7 +33,7 @@ public class SecurityConfiguration{
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/landing", "/register").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/moderator/**").hasRole("MODERATOR")
+                        .requestMatchers("/moderator/**").hasAuthority("MODERATOR_PRIVILEGES")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
