@@ -6,7 +6,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,8 +24,7 @@ public class User {
     private String firstName;
     private String lastName;
 
-    @Lob
-    private Byte[] profileImage;
+    private String profileImageUrl;
 
     @ElementCollection
     private List<String> subjects = new ArrayList<>();
@@ -38,7 +36,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Task> tasks = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -69,9 +67,6 @@ public class User {
     private List<User> friends = new ArrayList<>();
 
 
-    public void setProfilePicture(byte[] bytes) {
-
-    }
 
     public List<Task> getTasksForQuest(StudyQuest studyQuest) {
         return tasks.stream()

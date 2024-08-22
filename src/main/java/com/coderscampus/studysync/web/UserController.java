@@ -24,7 +24,7 @@ public class UserController {
 
     @PostMapping("/register")
     public String postRegister(User user) {
-        userService.saveUser(user, "USER");
+        userService.save(user, "USER");
         System.out.println("User saved: " + user); // Add this line for debugging
         return "redirect:/login";
     }

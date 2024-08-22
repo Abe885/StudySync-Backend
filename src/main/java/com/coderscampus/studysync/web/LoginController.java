@@ -14,6 +14,6 @@ public class LoginController {
 
     @PostMapping("/login")
     public String postLogin() {
-        return "redirect:/userdashboard";
+        return "userdashboard";
     }
 }
