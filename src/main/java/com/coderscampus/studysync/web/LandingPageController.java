@@ -11,6 +11,9 @@ public class LandingPageController {
         return "landing";
     }
 
-
+    @GetMapping("/landing")
+    public String displayLandingPage() {
+        return "landing";
+    }
 
 }
