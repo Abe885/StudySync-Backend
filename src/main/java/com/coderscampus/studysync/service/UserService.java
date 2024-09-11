@@ -33,9 +33,7 @@ public class UserService {
     public void save(User user, String roleName) {
         Role role = roleRepository.findByName(roleName);
         user.setRoles(Collections.singletonList(role));
-
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
 
         userRepository.save(user);
     }
@@ -46,8 +44,8 @@ public class UserService {
             String imageUrl = saveProfilePicture(profilePicture);
             user.setProfileImageUrl(imageUrl);
         }
-
         user.setSubjects(subjects);
+
         userRepository.save(user);
     }
 
@@ -55,7 +53,7 @@ public class UserService {
         String fileName = UUID.randomUUID().toString() + "_" + profilePicture.getOriginalFilename();
         Path path = Paths.get("src/main/resources/static/profileImages");
         Files.write(path, profilePicture.getBytes());
+
         return fileName;
     }
-
 }

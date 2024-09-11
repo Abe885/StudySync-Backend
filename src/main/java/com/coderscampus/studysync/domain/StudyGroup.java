@@ -17,7 +17,6 @@ public class StudyGroup {
     private String category;
     private Boolean isFlagged;
     private Boolean isPrivate;
-
     @ManyToMany
     @JoinTable(
             name = "study_group_user",

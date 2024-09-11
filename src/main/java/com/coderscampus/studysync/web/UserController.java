@@ -15,7 +15,6 @@ public class UserController {
         this.userService = userService;
     }
 
-
     @GetMapping("/register")
     public String getRegister(ModelMap model) {
         model.put("user", new User());

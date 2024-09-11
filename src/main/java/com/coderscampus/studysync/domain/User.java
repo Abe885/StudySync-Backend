@@ -27,12 +27,9 @@ public class User implements UserDetails {
     private String password;
     private String firstName;
     private String lastName;
-
     private String profileImageUrl;
-
     @ElementCollection
     private List<String> subjects = new ArrayList<>();
-
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<StudyQuest> studyQuests = new ArrayList<>();
@@ -41,20 +38,11 @@ public class User implements UserDetails {
     private List<Task> tasks = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();
 
-
     @ManyToMany
-    @JoinTable(
-            name = "study_group_user",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "study_group_id")
-    )
+    @JoinTable(name = "study_group_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "study_group_id"))
     private List<StudyGroup> studyGroups = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -64,25 +52,16 @@ public class User implements UserDetails {
     private List<Message> messages = new ArrayList<>();
 
     @ManyToMany
-    @JoinTable(
-            name = "user_friends",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "friend_id")
-    )
+    @JoinTable(name = "user_friends", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "friend_id"))
     private List<User> friends = new ArrayList<>();
 
 
     public List<Task> getTasksForQuest(StudyQuest studyQuest) {
-        return tasks.stream()
-                .filter(task -> task.getStudyQuest().equals(studyQuest))
-                .collect(Collectors.toList());
+        return tasks.stream().filter(task -> task.getStudyQuest().equals(studyQuest)).collect(Collectors.toList());
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .flatMap(role -> role.getAuthorities().stream())
-                .map(authority -> new SimpleGrantedAuthority(authority.getName()))
-                .collect(Collectors.toSet());
+        return roles.stream().flatMap(role -> role.getAuthorities().stream()).map(authority -> new SimpleGrantedAuthority(authority.getName())).collect(Collectors.toSet());
     }
 
     @Override

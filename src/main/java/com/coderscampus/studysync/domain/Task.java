@@ -16,11 +16,9 @@ public class Task {
     private String name;
     private String description;
     private Boolean isComplete;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
     @ManyToOne
     @JoinColumn(name = "study_quest_id")
     private StudyQuest studyQuest;

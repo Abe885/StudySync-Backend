@@ -17,16 +17,12 @@ public class StudyQuest {
     private Boolean isComplete;
     private int totalTasks;
     private int completedTasks;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
     @ManyToOne
     @JoinColumn(name = "study_group_id")
     private StudyGroup studyGroup;
-
-
     @OneToMany(mappedBy = "studyQuest", cascade = CascadeType.ALL)
     private List<Task> tasks;
 
